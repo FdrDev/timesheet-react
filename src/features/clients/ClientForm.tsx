@@ -5,6 +5,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "@/components/ui/button.tsx";
 import {Field, FieldError, FieldLabel} from "@/components/ui/field.tsx";
 import {Input} from "@/components/ui/input.tsx";
+import {addClient} from "@/store/slices/clientsSlice.ts";
+import {useAppDispatch} from "@/store/hooks.ts";
 
 export const ClientForm: React.FC = () => {
     const form = useForm<ClientFormData>({
@@ -12,8 +14,11 @@ export const ClientForm: React.FC = () => {
         defaultValues: { name: '', email: '', phone: '' }
     });
 
+    const dispatch = useAppDispatch()
+
     const onSubmit = (data: ClientFormData) => {
-        console.log(data)
+        dispatch(addClient(data))
+        form.reset()
     }
 
     return (

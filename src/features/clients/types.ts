@@ -5,8 +5,3 @@ export interface Client {
     email?: string;
     phone?: string;
 }
-
-export interface ClientListProps {
-    clients: Client[];
-}
-
