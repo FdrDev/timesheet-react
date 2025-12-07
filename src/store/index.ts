@@ -1,9 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 import clientsReducer from './slices/clientsSlice';
+import timerReducer from './slices/timerSlice';
+
 
 export const store = configureStore({
     reducer: {
-        clients: clientsReducer
+        clients: clientsReducer,
+        timer: timerReducer
     }
 })
 
@@ -11,6 +14,7 @@ export const store = configureStore({
 store.subscribe(() => {
     const state = store.getState();
     localStorage.setItem('clients', JSON.stringify(state.clients.clients));
+    localStorage.setItem('timer', JSON.stringify(state.timer.timerHistory))
 });
 
 export type RootState = ReturnType<typeof store.getState>;

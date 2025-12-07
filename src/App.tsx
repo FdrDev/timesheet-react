@@ -3,6 +3,8 @@ import {ThemeProvider} from "@/components/theme-provider.tsx";
 import {ClientsList} from "@/features/clients/ClientsList.tsx";
 import {Navbar} from "@/components/blocks/Navbar.tsx";
 import {ClientForm} from "@/features/clients/ClientForm.tsx";
+import { TimerDisplay } from './features/timer/TimerDisplay';
+import { TimerControls } from './features/timer/TimerControls';
 
 function App() {
 
@@ -13,6 +15,8 @@ function App() {
                     <Navbar/>
                     <ClientsList />
                     <ClientForm />
+                    <TimerControls />
+                    <TimerDisplay />
                 </main>
             </ThemeProvider>
 
