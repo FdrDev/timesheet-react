@@ -4,4 +4,5 @@ export interface Client {
     hours?: number;
     email?: string;
     phone?: string;
+    timerIds?: number[];
 }

@@ -21,6 +21,20 @@ const timerSlice = createSlice({
                 startTime: Date.now()
             }
         },
+        pauseTimer: (state) => {
+            if (state.currentTimer.startTime && !state.currentTimer.pausedTime){
+                const now  = Date.now()
+                const elapsed = now - state.currentTimer.startTime
+                state.currentTimer.totalElapsed = (state.currentTimer.totalElapsed || 0 ) + elapsed
+                state.currentTimer.pausedTime = now
+            }
+        },
+        resumeTimer: (state) => {
+            if (state.currentTimer.pausedTime) {
+                state.currentTimer.startTime = Date.now()
+                state.currentTimer.pausedTime = undefined
+            }
+        },
         stopTimer: (state) => {
             if (state.currentTimer.startTime) {
                 const completedTimer: Timer = {
@@ -44,5 +58,5 @@ const timerSlice = createSlice({
     }
 })
 
-export const {startTimer, stopTimer, setTimerHistory, updateCurrentTimerNotes } = timerSlice.actions
+export const {startTimer, stopTimer, pauseTimer, resumeTimer, setTimerHistory, updateCurrentTimerNotes } = timerSlice.actions
 export default timerSlice.reducer

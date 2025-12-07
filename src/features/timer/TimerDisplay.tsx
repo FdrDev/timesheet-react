@@ -8,18 +8,31 @@ export const TimerDisplay: React.FC = () => {
     const [elapsed, setElapsed] = useState(0)
 
     useEffect(()=>{
-        if (currentTimer.startTime){
+        if (!currentTimer.startTime){
             setElapsed(0)
+            return
         }
-        const interval = setInterval(() => {
-        setElapsed(Date.now() - currentTimer.startTime!)
-        }, 1000 )
 
+        if (currentTimer.pausedTime) {
+            setElapsed(currentTimer.totalElapsed || 0)
+            return
+        }
+
+        const baseElapsed = currentTimer.totalElapsed || 0
+        setElapsed(baseElapsed + (Date.now() - currentTimer.startTime))
+        
+        const interval = setInterval(() => {
+            setElapsed(baseElapsed + (Date.now() - currentTimer.startTime!))
+        }, 1000)
+
+        
         return () => clearInterval(interval)
-    }, [currentTimer.startTime])
+    }, [currentTimer.startTime, currentTimer.pausedTime, currentTimer.totalElapsed])
 
     if (!currentTimer.startTime){
-        <div>Nessun Timer attivo</div>
+        return(
+            <div>Nessun Timer attivo</div>
+        )
     }
     return (
         <div className="text-center">

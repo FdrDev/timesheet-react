@@ -5,6 +5,8 @@ export interface Timer {
     startTime?: number
     endTime?: number
     notes?: string
+    pausedTime?: number
+    totalElapsed?: number
 }
 
 export interface TimerState {
